@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             menu.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
@@ -56,6 +57,7 @@ public class SoundManager : MonoBehaviour
         file.Close();
         saveMenu.SetActive(false);
         menu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void LoadGame()
@@ -79,6 +81,7 @@ public class SoundManager : MonoBehaviour
         LoadGame();
         saveMenu.SetActive(false);
         menu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     [Serializable]
