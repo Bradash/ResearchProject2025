@@ -12,7 +12,15 @@ public class SoundManager : MonoBehaviour
     public AudioSource Music;
     public AudioSource[] Sounds;
     public GameObject saveMenu;
+    public GameObject menu;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menu.SetActive(true);
+        }
+    }
 
     private void Start()
     {
@@ -47,7 +55,7 @@ public class SoundManager : MonoBehaviour
         //Close
         file.Close();
         saveMenu.SetActive(false);
-
+        menu.SetActive(false);
     }
 
     public void LoadGame()
@@ -70,6 +78,7 @@ public class SoundManager : MonoBehaviour
     {
         LoadGame();
         saveMenu.SetActive(false);
+        menu.SetActive(false);
     }
 
     [Serializable]
@@ -85,7 +94,7 @@ public class SoundManager : MonoBehaviour
         Music.volume = musicSlider.value;
         for (int i = 0; i < Sounds.Length; i++)
         {
-            Sounds[i].volume *= soundSlider.value;
+            Sounds[i].volume = soundSlider.value;
         }
     }
 }
