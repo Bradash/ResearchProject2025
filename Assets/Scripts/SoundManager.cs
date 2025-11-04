@@ -13,6 +13,11 @@ public class SoundManager : MonoBehaviour
     public AudioSource[] Sounds;
     public GameObject saveMenu;
 
+
+    private void Start()
+    {
+        LoadGame();
+    }
     public void saveChangesFunc()
     {
         saveMenu.SetActive(true);
@@ -22,7 +27,6 @@ public class SoundManager : MonoBehaviour
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file;
-
         //If the files exists open it.
         if(File.Exists(Application.persistentDataPath + "/menudata.dat"))
         {
@@ -45,8 +49,26 @@ public class SoundManager : MonoBehaviour
         saveMenu.SetActive(false);
 
     }
+
+    public void LoadGame()
+    {
+        if (File.Exists(Application.persistentDataPath + "/menudata.dat"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            //Open the data
+            FileStream file = File.Open(Application.persistentDataPath + "/menudata.dat", FileMode.Open);
+            //Deserialize all the data
+            MenuData data = (MenuData)bf.Deserialize(file);
+            //Set the data
+            musicSlider.value = data.savedMusicValue;
+            soundSlider.value = data.savedSoundValue;
+            file.Close();
+        }
+    }
+
     public void dontSave() 
     {
+        LoadGame();
         saveMenu.SetActive(false);
     }
 
@@ -58,7 +80,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void UpdateVolumes()
     {
         Music.volume = musicSlider.value;
         for (int i = 0; i < Sounds.Length; i++)
