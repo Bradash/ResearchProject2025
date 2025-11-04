@@ -16,10 +16,10 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Music.volume *= musicSlider.value;
+        Music.volume = musicSlider.value;
         for (int i = 0; i < Sounds.Length; i++)
         {
-            Sounds[i].volume *= soundSlider.value;
+            Sounds[i].volume = soundSlider.value;
         }  
     }
 }
