@@ -12,7 +12,11 @@ public class SoundManager : MonoBehaviour
     public AudioSource Music;
     public AudioSource[] Sounds;
     public GameObject saveMenu;
-    public bool saveChanges;
+
+    public void saveChangesFunc()
+    {
+        saveMenu.SetActive(true);
+    }
 
     public void SaveGame()
     {
@@ -22,12 +26,12 @@ public class SoundManager : MonoBehaviour
         //If the files exists open it.
         if(File.Exists(Application.persistentDataPath + "/menudata.dat"))
         {
-            file = File.Open(Application.persistentDataPath + "/menudata.dat", FileMode.Open):
+            file = File.Open(Application.persistentDataPath + "/menudata.dat", FileMode.Open);
         }
         //Else create it.
         else
         {
-            file = File.Create(Application.persistentDataPath + "/menudata.dat"):
+            file = File.Create(Application.persistentDataPath + "/menudata.dat");
         }
         //Write Data.
         MenuData data = new MenuData();
@@ -38,7 +42,12 @@ public class SoundManager : MonoBehaviour
         bf.Serialize(file, data);
         //Close
         file.Close();
+        saveMenu.SetActive(false);
 
+    }
+    public void dontSave() 
+    {
+        saveMenu.SetActive(false);
     }
 
     [Serializable]
@@ -52,9 +61,9 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         Music.volume = musicSlider.value;
-        foreach (AudioSource i in Sounds)
+        for (int i = 0; i < Sounds.Length; i++)
         {
-            Sounds[i].volume = soundSlider.value;
-        }  
+            Sounds[i].volume *= soundSlider.value;
+        }
     }
 }
