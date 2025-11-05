@@ -7,13 +7,13 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     private void Start()
     {
-        
+        LoadColor();
     }
     public Rigidbody2D rb;
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
+        Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         rb.MovePosition(rb.position + (moveDirection * 5 * Time.fixedDeltaTime));
     }
 
