@@ -3,34 +3,20 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField]
     public inventoryClass inventory;
+    public ItemType[] itemTypes;
     [SerializeField]
     public class inventoryClass
     {
-        public item[] items;
+        public ItemType[] saveditemTypes;
     }
-    public class item
-    {
-        public string name;
-        public ItemType itemType;
-        public float itemAmount;
-    }
-    public enum ItemType
-    {
-        None,
-        Melee,
-        Guns,
-        Ammo,
-    }
-
 
     public void Save()
     {
         //grab public Class
         inventoryClass data = new inventoryClass();
         //set public class values from client side values
-
+        data.saveditemTypes = itemTypes;
         //make public class to json
         string json = JsonUtility.ToJson(data);
         //set path with writer
@@ -54,5 +40,6 @@ public class Inventory : MonoBehaviour
         //convert string json to public class
         inventoryClass data = JsonUtility.FromJson<inventoryClass>(json);
         //set client values public class values
+        itemTypes = data.saveditemTypes;
     }
 }
