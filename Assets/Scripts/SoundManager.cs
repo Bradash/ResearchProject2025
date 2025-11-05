@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEditor.Overlays;
 
 public class SoundManager : MonoBehaviour
 {
@@ -34,27 +33,14 @@ public class SoundManager : MonoBehaviour
 
     public void SaveGame()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file;
-        //If the files exists open it.
-        if(File.Exists(Application.persistentDataPath + "/menudata.dat"))
-        {
-            file = File.Open(Application.persistentDataPath + "/menudata.dat", FileMode.Open);
-        }
-        //Else create it.
-        else
-        {
-            file = File.Create(Application.persistentDataPath + "/menudata.dat");
-        }
-        //Write Data.
         MenuData data = new MenuData();
-        data.savedMusicValue = musicSlider.value;
-        data.savedSoundValue = soundSlider.value;
+        string json = JsonUtility.ToJson(data);
 
-        //Write Data.
-        bf.Serialize(file, data);
-        //Close
-        file.Close();
+        using(StreamWriter writer = new StreamWriter(Application.persistentDataPath + "menudata.json"))
+        {
+            writer.Write(json);
+        }
+
         saveMenu.SetActive(false);
         menu.SetActive(false);
         Time.timeScale = 1;
@@ -64,15 +50,17 @@ public class SoundManager : MonoBehaviour
     {
         if (File.Exists(Application.persistentDataPath + "/menudata.dat"))
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            //Open the data
-            FileStream file = File.Open(Application.persistentDataPath + "/menudata.dat", FileMode.Open);
-            //Deserialize all the data
-            MenuData data = (MenuData)bf.Deserialize(file);
+            string json;
+
+            using(StreamReader reader = new StreamReader(Application.persistentDataPath + "menudata.json"))
+            {
+                json = reader.ReadToEnd();
+            }
+
+            MenuData data = JsonUtility.FromJson<MenuData>(json);
             //Set the data
             musicSlider.value = data.savedMusicValue;
             soundSlider.value = data.savedSoundValue;
-            file.Close();
         }
     }
 
