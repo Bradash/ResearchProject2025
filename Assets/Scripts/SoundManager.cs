@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class SoundManager : MonoBehaviour
 {
@@ -34,8 +33,10 @@ public class SoundManager : MonoBehaviour
     public void SaveGame()
     {
         MenuData data = new MenuData();
-        string json = JsonUtility.ToJson(data);
+        data.savedMusicValue = musicSlider.value;
+        data.savedSoundValue = soundSlider.value;
 
+        string json = JsonUtility.ToJson(data);
         using(StreamWriter writer = new StreamWriter(Application.persistentDataPath + "menudata.json"))
         {
             writer.Write(json);
@@ -48,8 +49,6 @@ public class SoundManager : MonoBehaviour
 
     public void LoadGame()
     {
-        if (File.Exists(Application.persistentDataPath + "/menudata.dat"))
-        {
             string json;
 
             using(StreamReader reader = new StreamReader(Application.persistentDataPath + "menudata.json"))
@@ -58,18 +57,17 @@ public class SoundManager : MonoBehaviour
             }
 
             MenuData data = JsonUtility.FromJson<MenuData>(json);
-            //Set the data
             musicSlider.value = data.savedMusicValue;
             soundSlider.value = data.savedSoundValue;
-        }
+            Debug.Log(data.savedMusicValue);
     }
 
     public void dontSave() 
     {
+        Time.timeScale = 1;
         LoadGame();
         saveMenu.SetActive(false);
         menu.SetActive(false);
-        Time.timeScale = 1;
     }
 
     [Serializable]
