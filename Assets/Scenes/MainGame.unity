@@ -2609,6 +2609,7 @@ GameObject:
   - component: {fileID: 1504674981}
   - component: {fileID: 1504674983}
   - component: {fileID: 1504674984}
+  - component: {fileID: 1504674985}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2774,6 +2775,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1504674982}
   rb: {fileID: 1504674983}
+--- !u!114 &1504674985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504674979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92413b4ea73f6b645b5643fda866ca38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - name: Machete
+    itemType: 1
+    itemAmount: 1
+  - name: Pistol
+    itemType: 2
+    itemAmount: 1
+  - name: Pistol Ammo
+    itemType: 3
+    itemAmount: 64
+  - name: Shotgun
+    itemType: 2
+    itemAmount: 64
+  - name: Shotgun Ammo
+    itemType: 3
+    itemAmount: 64
 --- !u!1 &1656099090
 GameObject:
   m_ObjectHideFlags: 0
