@@ -10,6 +10,11 @@ public class PlayerCustomizer : MonoBehaviour
     public Slider sliderG;
     public Slider sliderB;
     Color playerColor;
+
+    private void Start()
+    {
+        LoadColor();
+    }
     private void Update()
     {
         playerColor = new Color(sliderR.value, sliderG.value, sliderB.value);
@@ -34,5 +39,22 @@ public class PlayerCustomizer : MonoBehaviour
             //Serialize and Write file
             writer.Write(json);
         }
+    }
+    public void LoadColor()
+    {
+        //string for json
+        string json;
+        //set path with reader
+        using (StreamReader reader = new StreamReader(Application.persistentDataPath + "playerColor.json"))
+        {
+            //Deserialize to string
+            json = reader.ReadToEnd();
+        }
+        //convert string json to public class
+        PlayerColor data = JsonUtility.FromJson<PlayerColor>(json);
+        //set client values public class values
+        sliderR.value = data.savedColor.r;
+        sliderG.value = data.savedColor.g;
+        sliderB.value = data.savedColor.b;
     }
 }

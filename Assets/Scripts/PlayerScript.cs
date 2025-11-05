@@ -10,11 +10,11 @@ public class PlayerScript : MonoBehaviour
     {
         LoadColor();
     }
-    void Update()
+    void FixedUpdate()
     {
         playerFaceMouse();
         Vector2 moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        rb.MovePosition(rb.position + (moveDirection * 5 * Time.deltaTime));
+        rb.MovePosition(rb.position + (moveDirection * 5 * Time.fixedDeltaTime));
     }
     void playerFaceMouse()
     {

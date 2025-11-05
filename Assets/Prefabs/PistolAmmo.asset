@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc18b3debe44ee449897024a2d7cb91, type: 3}
   m_Name: PistolAmmo
   m_EditorClassIdentifier: 
-  name: Pistol
-  itemType: 2
-  itemAmount: 1
+  name: Pistol Ammo
+  itemType: 3
+  itemAmount: 64
