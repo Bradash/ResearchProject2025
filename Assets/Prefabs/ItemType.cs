@@ -4,6 +4,7 @@ using UnityEngine;
 public class ItemType : ScriptableObject
 {
     public string name;
+    public GameObject prefab;
     public itemTypeEnum itemType;
     public float itemAmount;
 public enum itemTypeEnum
