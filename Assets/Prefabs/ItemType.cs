@@ -6,9 +6,8 @@ public class ItemType : ScriptableObject
 {
     public string name;
     public GameObject prefab;
-    public Image image;
+    public Sprite image;
     public itemTypeEnum itemType;
-    public float itemAmount;
 public enum itemTypeEnum
 {
     None,

@@ -4,12 +4,13 @@ using UnityEngine.UI;
 public class InventoryItem : MonoBehaviour
 {
     public ItemType Item;
-    public Image image;
+    Image image;
 
 
 
     private void Start()
     {
+        image = GetComponent<Image>();
         image.sprite = Item.image;
     }
 }
