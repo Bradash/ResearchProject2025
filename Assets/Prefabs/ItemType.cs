@@ -12,6 +12,5 @@ public enum itemTypeEnum
     None,
     Melee,
     Guns,
-    Ammo,
 }
 }
