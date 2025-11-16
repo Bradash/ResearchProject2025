@@ -6,9 +6,7 @@ public class InventoryItem : MonoBehaviour
     public ItemType Item;
     Image image;
 
-
-
-    private void Start()
+    public void changeItem()
     {
         image = GetComponent<Image>();
         image.sprite = Item.image;

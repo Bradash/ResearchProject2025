@@ -4,11 +4,38 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public inventoryClass inventory;
-    public ItemType[] itemTypes;
+    public InventoryItem[] inventoryItems;
+    public ItemType addItemTest;
     [SerializeField]
     public class inventoryClass
     {
-        public ItemType[] saveditemTypes;
+        public InventoryItem[] savedinventoryItems;
+    }
+
+    private void Start()
+    {
+        //DEBUG, On start add this ItemType.
+        Additem(addItemTest);
+    }
+    //Search for the nearest "Null" ItemType slot inside the Array of InventoryItem Scripts.
+    public void Additem(ItemType itemType)
+    {
+        for (int i = 0; i < inventoryItems.Length; i++)
+        {
+            InventoryItem Item = inventoryItems[i];
+            if (Item.Item == null)
+            {
+                SpawnItem(itemType, Item);
+                return;
+            }
+        }
+    }
+    //Set the chosen InventoryItem's ItemType to chosen Itemtype.
+    //Then update Sprite
+    public void SpawnItem(ItemType itemType, InventoryItem Item)
+    {
+        Item.Item = itemType;
+        Item.changeItem();
     }
 
     public void Save()
@@ -16,7 +43,7 @@ public class Inventory : MonoBehaviour
         //grab public Class
         inventoryClass data = new inventoryClass();
         //set public class values from client side values
-        data.saveditemTypes = itemTypes;
+        data.savedinventoryItems = inventoryItems;
         //make public class to json
         string json = JsonUtility.ToJson(data);
         //set path with writer
@@ -40,6 +67,6 @@ public class Inventory : MonoBehaviour
         //convert string json to public class
         inventoryClass data = JsonUtility.FromJson<inventoryClass>(json);
         //set client values public class values
-        itemTypes = data.saveditemTypes;
+        inventoryItems = data.savedinventoryItems;
     }
 }
