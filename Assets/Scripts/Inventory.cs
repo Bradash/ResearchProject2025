@@ -5,17 +5,12 @@ public class Inventory : MonoBehaviour
 {
     public inventoryClass inventory;
     public InventoryItem[] inventoryItems;
-    public ItemType addItemTest;
+    public ItemType[] itemTypes;
+    int[] items;
     [SerializeField]
     public class inventoryClass
     {
-        public InventoryItem[] savedinventoryItems;
-    }
-
-    private void Start()
-    {
-        //DEBUG, On start add this ItemType.
-        Additem(addItemTest);
+        public int[] savedItems;
     }
     //Search for the nearest "Null" ItemType slot inside the Array of InventoryItem Scripts.
     public void Additem(ItemType itemType)
@@ -40,10 +35,11 @@ public class Inventory : MonoBehaviour
 
     public void Save()
     {
+        convertToNumbers();
         //grab public Class
         inventoryClass data = new inventoryClass();
         //set public class values from client side values
-        data.savedinventoryItems = inventoryItems;
+        data.savedItems = items;
         //make public class to json
         string json = JsonUtility.ToJson(data);
         //set path with writer
@@ -53,7 +49,6 @@ public class Inventory : MonoBehaviour
             writer.Write(json);
         }
     }
-
     public void LoadGame()
     {
         //string for json
@@ -67,6 +62,28 @@ public class Inventory : MonoBehaviour
         //convert string json to public class
         inventoryClass data = JsonUtility.FromJson<inventoryClass>(json);
         //set client values public class values
-        inventoryItems = data.savedinventoryItems;
+        items = data.savedItems;
+
+        convertToItemTypes();
+
+        for (int i = 0; i < inventoryItems.Length; i++)
+        {
+            inventoryItems[i].changeItem();
+        }
+    }
+
+    public void convertToNumbers()
+    {
+        for (int i = 0; i < inventoryItems.Length; i++)
+        {
+            items[i] = inventoryItems[i].Item.itemID;
+        }
+    }
+    public void convertToItemTypes()
+    {
+        for (int i = 0; i < itemTypes.Length; i++)
+        {
+            inventoryItems[i].Item = itemTypes[items[i]];
+        }
     }
 }
