@@ -9,6 +9,13 @@ public class InventoryItem : MonoBehaviour
     public void changeItem()
     {
         image = GetComponent<Image>();
-        image.sprite = Item.image;
+        if (Item != null)
+        {
+            image.sprite = Item.image;
+        }
+        else
+        {
+            image.sprite = null;
+        }
     }
 }

@@ -8,6 +8,11 @@ public class Inventory : MonoBehaviour
     public ItemType[] itemTypes;
     int[] items;
     [SerializeField]
+    private void Start()
+    {
+        items = new int[inventoryItems.Length];
+    }
+
     public class inventoryClass
     {
         public int[] savedItems;
@@ -76,12 +81,19 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < inventoryItems.Length; i++)
         {
-            items[i] = inventoryItems[i].Item.itemID;
+            if (inventoryItems[i].Item != null)
+            {
+                items[i] = inventoryItems[i].Item.itemID;
+            }
+            else
+            {
+                items[i] = 0;
+            }    
         }
     }
     public void convertToItemTypes()
     {
-        for (int i = 0; i < itemTypes.Length; i++)
+        for (int i = 0; i < inventoryItems.Length; i++)
         {
             inventoryItems[i].Item = itemTypes[items[i]];
         }
