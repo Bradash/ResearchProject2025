@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    ItemType item;
-    public Inventory inventory;
+    public ItemType item;
+    Inventory inventory;
     SpriteRenderer spriteRenderer;
 
     private void Start()
