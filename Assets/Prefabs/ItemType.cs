@@ -8,11 +8,4 @@ public class ItemType : ScriptableObject
     public string name;
     public GameObject prefab;
     public Sprite image;
-    public itemTypeEnum itemType;
-public enum itemTypeEnum
-{
-    None,
-    Melee,
-    Guns,
-}
 }

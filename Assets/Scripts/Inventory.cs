@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour
     public InventoryItem[] inventoryItems;
     public ItemType[] itemTypes;
     int[] items;
-    [SerializeField]
+
     private void Start()
     {
         items = new int[inventoryItems.Length];
