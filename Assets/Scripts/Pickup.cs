@@ -13,7 +13,7 @@ public class Pickup : MonoBehaviour
         spriteRenderer.sprite = item.image;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         inventory = collision.gameObject.GetComponent<Inventory>();
         inventory.Additem(item);
