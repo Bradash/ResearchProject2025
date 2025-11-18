@@ -5,6 +5,7 @@ public class InventoryItem : MonoBehaviour
 {
     public ItemType Item;
     Image image;
+    public GameObject selectedHighlight;
 
     public void changeItem()
     {

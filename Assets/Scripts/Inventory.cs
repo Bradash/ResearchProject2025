@@ -7,10 +7,39 @@ public class Inventory : MonoBehaviour
     public InventoryItem[] inventoryItems;
     public ItemType[] itemTypes;
     int[] items;
+    int selectedItem;
 
     private void Start()
     {
         items = new int[inventoryItems.Length];
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        {
+            selectedItem = 0;
+            changeSelect();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            selectedItem = 1;
+            changeSelect();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            selectedItem = 2;
+            changeSelect();
+        }
+
+    }
+
+    private void changeSelect()
+    {
+        for (int i = 0; i < inventoryItems.Length; i++)
+        {
+            inventoryItems[i].selectedHighlight.SetActive(false);
+        }
+        inventoryItems[selectedItem].selectedHighlight.SetActive(true);
     }
 
     public class inventoryClass
@@ -98,4 +127,5 @@ public class Inventory : MonoBehaviour
             inventoryItems[i].Item = itemTypes[items[i]];
         }
     }
+
 }
