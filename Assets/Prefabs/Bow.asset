@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 3
   name: Bow
-  prefab: {fileID: 2982836799854697163, guid: e340162a5edf51643b038b28bc15ac29, type: 3}
+  prefab: {fileID: 4458269576851142133, guid: 86e82916eab226b4eac11aacc894db36, type: 3}
   image: {fileID: -3964049625328689725, guid: ec3a58cce1ebb5e4a8c03491db72f658, type: 3}
-  itemType: 2

@@ -1,4 +1,5 @@
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -6,8 +7,10 @@ public class Inventory : MonoBehaviour
     public inventoryClass inventory;
     public InventoryItem[] inventoryItems;
     public ItemType[] itemTypes;
+    public SpriteRenderer weaponSprite;
     int[] items;
     int selectedItem;
+    int lastSelected;
 
     private void Start()
     {
@@ -30,16 +33,24 @@ public class Inventory : MonoBehaviour
             selectedItem = 2;
             changeSelect();
         }
-
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            deselect();
+        }
     }
 
     private void changeSelect()
     {
-        for (int i = 0; i < inventoryItems.Length; i++)
-        {
-            inventoryItems[i].selectedHighlight.SetActive(false);
-        }
+        inventoryItems[lastSelected].selectedHighlight.SetActive(false);
+        lastSelected = selectedItem;
         inventoryItems[selectedItem].selectedHighlight.SetActive(true);
+        if (inventoryItems[selectedItem].Item != null) weaponSprite.sprite = inventoryItems[selectedItem].Item.image;
+        else weaponSprite.sprite = null;
+    }
+    private void deselect()
+    {
+        inventoryItems[lastSelected].selectedHighlight.SetActive(false);
+        weaponSprite.sprite = null;
     }
 
     public class inventoryClass

@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 2
   name: Big Sword
-  prefab: {fileID: 2982836799854697163, guid: e340162a5edf51643b038b28bc15ac29, type: 3}
+  prefab: {fileID: 4458269576851142133, guid: 1e8cb66319e13244f804ae6a3c15db89, type: 3}
   image: {fileID: -8744361999528005354, guid: 05247cfbcef06a44c9843748b23a78a8, type: 3}
-  itemType: 1
