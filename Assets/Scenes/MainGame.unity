@@ -1260,7 +1260,7 @@ PrefabInstance:
     - target: {fileID: 1651134623236868559, guid: 941cf8795f5d00042a36a8d93f408a79, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 345f803add9df174390bf7fcb368fd6a, type: 2}
+      objectReference: {fileID: 11400000, guid: ecc4c6a3ad536b540be1b92f802f7999, type: 2}
     - target: {fileID: 4153293546697804385, guid: 941cf8795f5d00042a36a8d93f408a79, type: 3}
       propertyPath: m_Name
       value: A Pickup (1)
@@ -2435,6 +2435,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978076839}
   m_CullTransparentMesh: 1
+--- !u!1 &1003830346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1003830347}
+  m_Layer: 0
+  m_Name: Drop Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1003830347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003830346}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1504674980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1028661431
 GameObject:
   m_ObjectHideFlags: 0
@@ -3492,6 +3523,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5192961587991164268}
+  - {fileID: 1003830347}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1504674981
@@ -3658,6 +3690,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 16c4ac09a2326a04faef35578a451433, type: 2}
   - {fileID: 11400000, guid: 345f803add9df174390bf7fcb368fd6a, type: 2}
   weaponSprite: {fileID: 1996670882658995409}
+  pickupDrop: {fileID: 4153293546697804385, guid: 941cf8795f5d00042a36a8d93f408a79, type: 3}
+  dropLocation: {fileID: 1003830347}
 --- !u!1 &1656099090
 GameObject:
   m_ObjectHideFlags: 0

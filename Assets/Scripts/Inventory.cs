@@ -1,6 +1,7 @@
 using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Inventory : MonoBehaviour
     public InventoryItem[] inventoryItems;
     public ItemType[] itemTypes;
     public SpriteRenderer weaponSprite;
+    public GameObject pickupDrop;
+    Pickup pickup;
+    public Transform dropLocation;
     int[] items;
     int selectedItem;
     int lastSelected;
@@ -15,10 +19,11 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         items = new int[inventoryItems.Length];
+        pickup = pickupDrop.GetComponent<Pickup>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedItem = 0;
             changeSelect();
@@ -37,6 +42,10 @@ public class Inventory : MonoBehaviour
         {
             deselect();
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            dropItem();
+        }
     }
 
     private void changeSelect()
@@ -49,8 +58,20 @@ public class Inventory : MonoBehaviour
     }
     private void deselect()
     {
-        inventoryItems[lastSelected].selectedHighlight.SetActive(false);
+        inventoryItems[selectedItem].selectedHighlight.SetActive(false);
         weaponSprite.sprite = null;
+    }
+
+    private void dropItem()
+    {
+        if (inventoryItems[selectedItem].Item != null) 
+        { 
+            pickup.item = inventoryItems[selectedItem].Item;
+            Instantiate(pickupDrop, dropLocation.position, dropLocation.rotation);
+            deselect();
+            inventoryItems[selectedItem].Item = null;
+            inventoryItems[selectedItem].changeItem();
+        }
     }
 
     public class inventoryClass
