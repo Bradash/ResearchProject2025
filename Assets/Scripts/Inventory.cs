@@ -1,7 +1,6 @@
+using System;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -64,8 +63,8 @@ public class Inventory : MonoBehaviour
 
     private void dropItem()
     {
-        if (inventoryItems[selectedItem].Item != null) 
-        { 
+        if (inventoryItems[selectedItem].Item != null)
+        {
             pickup.item = inventoryItems[selectedItem].Item;
             Instantiate(pickupDrop, dropLocation.position, dropLocation.rotation);
             deselect();
@@ -144,20 +143,13 @@ public class Inventory : MonoBehaviour
         {
             if (inventoryItems[i].Item != null)
             {
-                //items[i] = inventoryItems[i].Item.itemID;
-                for (int s = 0; s < itemID.itemIDS.Length; s++)
-                {
-                    if (inventoryItems[i].Item == itemID.itemIDS[s])
-                    {
-                        items[i] = s;
-                    }
-                }
-
-                }
+                //It outputs the index number of an array from a specified object of the array.
+                items[i] = Array.IndexOf(itemID.itemIDS, inventoryItems[i].Item);
+            }
             else
             {
                 items[i] = 0;
-            }    
+            }
         }
     }
     public void convertToItemTypes()
