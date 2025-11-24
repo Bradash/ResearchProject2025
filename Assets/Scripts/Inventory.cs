@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour
 {
     public inventoryClass inventory;
     public InventoryItem[] inventoryItems;
-    public ItemType[] itemTypes;
+    public ItemID itemID;
     public SpriteRenderer weaponSprite;
     public GameObject pickupDrop;
     Pickup pickup;
@@ -144,8 +144,16 @@ public class Inventory : MonoBehaviour
         {
             if (inventoryItems[i].Item != null)
             {
-                items[i] = inventoryItems[i].Item.itemID;
-            }
+                //items[i] = inventoryItems[i].Item.itemID;
+                for (int s = 0; s < itemID.itemIDS.Length; s++)
+                {
+                    if (inventoryItems[i].Item == itemID.itemIDS[s])
+                    {
+                        items[i] = s;
+                    }
+                }
+
+                }
             else
             {
                 items[i] = 0;
@@ -156,7 +164,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < inventoryItems.Length; i++)
         {
-            inventoryItems[i].Item = itemTypes[items[i]];
+            inventoryItems[i].Item = itemID.itemIDS[items[i]];
         }
     }
 
