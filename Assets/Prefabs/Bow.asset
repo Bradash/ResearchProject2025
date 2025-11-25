@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   isShootable: 1
-  Range: 2
+  Range: 1
   Damage: 2
   name: Bow
   prefab: {fileID: 4458269576851142133, guid: 86e82916eab226b4eac11aacc894db36, type: 3}

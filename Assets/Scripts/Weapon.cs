@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
     public GameObject projectile;
     SpriteRenderer weaponSprite;
     public Transform playerTransform;
+    public GameObject trail;
 
     private void Start()
     {
@@ -30,15 +31,31 @@ public class Weapon : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Instantiate(projectile, transform.position, playerTransform.rotation);
+                    GameObject projectileNew = Instantiate(projectile, transform.position, playerTransform.rotation);
+                    var projectileScript = projectileNew.GetComponent<Projectile>();
+                    if (currentItem != null)
+                    {
+                        projectileScript.item = currentItem;
+                    }
+                    else 
+                    {
+                        Debug.LogError("Projectile is shot from no ItemType");
+                    }
                 }
             }
             else
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-
+                    weaponSprite.color = Color.red;
+                    trail.SetActive(true);
                 }
+                
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                weaponSprite.color = Color.white;
+                trail.SetActive(false);
             }
         }
     }
