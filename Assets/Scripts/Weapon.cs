@@ -2,13 +2,24 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public ItemType currentItem;
+    SpriteRenderer weaponSprite;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        weaponSprite = GetComponent<SpriteRenderer>();
+    }
+    public void changeItem()
+    {
+        if (currentItem == null)
+        {
+            weaponSprite.sprite = null;
+        }
+        else
+        {
+            weaponSprite.sprite = currentItem.image;
+        }
+    }
     void Update()
     {
         

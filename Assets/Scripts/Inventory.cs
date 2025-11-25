@@ -7,10 +7,10 @@ public class Inventory : MonoBehaviour
     public inventoryClass inventory;
     public InventoryItem[] inventoryItems;
     public ItemID itemID;
-    public SpriteRenderer weaponSprite;
     public GameObject pickupDrop;
     Pickup pickup;
     public Transform dropLocation;
+    public Weapon weapon;
     int[] items;
     int selectedItem;
     int lastSelected;
@@ -52,13 +52,22 @@ public class Inventory : MonoBehaviour
         inventoryItems[lastSelected].selectedHighlight.SetActive(false);
         lastSelected = selectedItem;
         inventoryItems[selectedItem].selectedHighlight.SetActive(true);
-        if (inventoryItems[selectedItem].Item != null) weaponSprite.sprite = inventoryItems[selectedItem].Item.image;
-        else weaponSprite.sprite = null;
+        if (inventoryItems[selectedItem].Item != null)
+        {
+            weapon.currentItem = inventoryItems[selectedItem].Item;
+            weapon.changeItem();
+        }
+        else
+        {
+            weapon.currentItem = null;
+            weapon.changeItem();
+        }
     }
     private void deselect()
     {
         inventoryItems[selectedItem].selectedHighlight.SetActive(false);
-        weaponSprite.sprite = null;
+        weapon.currentItem = null;
+        weapon.changeItem();
     }
 
     private void dropItem()
