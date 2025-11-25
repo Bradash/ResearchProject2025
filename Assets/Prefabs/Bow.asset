@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc18b3debe44ee449897024a2d7cb91, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  itemID: 3
+  isShootable: 1
+  Range: 2
+  Damage: 2
   name: Bow
   prefab: {fileID: 4458269576851142133, guid: 86e82916eab226b4eac11aacc894db36, type: 3}
   image: {fileID: -3964049625328689725, guid: ec3a58cce1ebb5e4a8c03491db72f658, type: 3}

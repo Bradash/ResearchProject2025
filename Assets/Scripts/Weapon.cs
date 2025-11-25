@@ -3,7 +3,9 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public ItemType currentItem;
+    public GameObject projectile;
     SpriteRenderer weaponSprite;
+    public Transform playerTransform;
 
     private void Start()
     {
@@ -22,6 +24,22 @@ public class Weapon : MonoBehaviour
     }
     void Update()
     {
-        
+        if (currentItem != null)
+        {
+            if (currentItem.isShootable)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Instantiate(projectile, transform.position, playerTransform.rotation);
+                }
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+
+                }
+            }
+        }
     }
 }
