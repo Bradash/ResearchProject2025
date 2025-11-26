@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
+        //Make a pool with all these parameters in, Create, Get, Release, Destroy, ReleaseException, default, max
         projectilePool = new ObjectPool<GameObject>(CreatePooledObject, OnGetFromPool, OnReturnToPool, OnDestroyPooledObject, false, 5, 10);
     }
     GameObject CreatePooledObject()
@@ -27,14 +28,17 @@ public class Weapon : MonoBehaviour
         }
         return projectileNew;
     }
+    //Get Object
     void OnGetFromPool(GameObject pooledObject)
     {
         pooledObject.SetActive(true);
     }
+    //Release Object
     void OnReturnToPool(GameObject pooledObject)
     {
         pooledObject.SetActive(false);
     }
+    //Destroy Object (If beyond max)
     void OnDestroyPooledObject(GameObject pooledObject)
     {
         Destroy(pooledObject);
@@ -58,13 +62,18 @@ public class Weapon : MonoBehaviour
     {
         if (currentItem != null)
         {
+            //if Bow, instantiate projectile when mouse click
             if (currentItem.isShootable)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    projectilePool.Get();
+                    var shotProjectile = projectilePool.Get();
+                    //I was missing this, set position and rotation when re-enabling
+                    shotProjectile.transform.position = transform.position;
+                    shotProjectile.transform.rotation = playerTransform.rotation;
                 }
             }
+            //if Sword, Make Object red and enable trail when Mouse click
             else
             {
                 if (Input.GetMouseButtonDown(0))
