@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public Weapon weapon;
     public ItemType item;
     public float speed;
     void Update()
@@ -11,6 +12,6 @@ public class Projectile : MonoBehaviour
     
     private void OnBecameInvisible()
     {
-        gameObject.SetActive(false);
+        weapon.projectilePool.Release(gameObject);
     }
 }

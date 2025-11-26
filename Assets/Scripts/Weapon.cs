@@ -20,6 +20,7 @@ public class Weapon : MonoBehaviour
     {
         GameObject projectileNew = Instantiate(projectile, transform.position, playerTransform.rotation);
         var projectileScript = projectileNew.GetComponent<Projectile>();
+        projectileScript.weapon = this;
         if (currentItem != null)
         {
             projectileScript.item = currentItem;
@@ -37,12 +38,6 @@ public class Weapon : MonoBehaviour
     void OnDestroyPooledObject(GameObject pooledObject)
     {
         Destroy(pooledObject);
-    }
-    IEnumerator ReturnAfter(GameObject pooledObject)
-    {
-        yield return new WaitForSeconds(currentItem.Range);
-        // Give it back to the pool.
-        projectilePool.Release(pooledObject);
     }
     private void Start()
     {
@@ -68,7 +63,6 @@ public class Weapon : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     projectilePool.Get();
-                    ReturnAfter();
                 }
             }
             else
