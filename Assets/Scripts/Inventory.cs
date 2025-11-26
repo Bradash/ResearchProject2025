@@ -22,6 +22,7 @@ public class Inventory : MonoBehaviour
     }
     private void Update()
     {
+        //if press 1 2 3 4 select inventory slot
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             selectedItem = 0;

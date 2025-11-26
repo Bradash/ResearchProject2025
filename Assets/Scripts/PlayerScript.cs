@@ -8,7 +8,10 @@ public class PlayerScript : MonoBehaviour
     public Rigidbody2D rb;
     private void Start()
     {
-        LoadColor();
+        //convert string json to public class
+        PlayerColor data = JsonUtility.FromJson<PlayerColor>(LoadFile("playerColor.json"));
+        //set client values public class values
+        spriteRenderer.color = data.savedColor;
     }
     void FixedUpdate()
     {
@@ -27,20 +30,17 @@ public class PlayerScript : MonoBehaviour
         transform.up = dir;
     }
 
-    public void LoadColor()
+    public string LoadFile(string jsonName)
     {
         //string for json
         string json;
         //set path with reader
-        using (StreamReader reader = new StreamReader(Application.persistentDataPath + "playerColor.json"))
+        using (StreamReader reader = new StreamReader(Application.persistentDataPath + jsonName))
         {
             //Deserialize to string
             json = reader.ReadToEnd();
         }
-        //convert string json to public class
-        PlayerColor data = JsonUtility.FromJson<PlayerColor>(json);
-        //set client values public class values
-        spriteRenderer.color = data.savedColor;
+        return json;
     }
     public class PlayerColor
     {
