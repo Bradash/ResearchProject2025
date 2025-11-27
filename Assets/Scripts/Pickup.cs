@@ -8,7 +8,6 @@ public class Pickup : MonoBehaviour
 
     private void Start()
     {
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = item.image;
     }
