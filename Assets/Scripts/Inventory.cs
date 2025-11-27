@@ -15,6 +15,12 @@ public class Inventory : MonoBehaviour
     int selectedItem;
     int lastSelected;
 
+    public class inventoryClass
+    {
+        public int[] savedItems;
+        public Vector3 playerPosition;
+    }
+
     private void Start()
     {
         items = new int[inventoryItems.Length];
@@ -83,10 +89,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public class inventoryClass
-    {
-        public int[] savedItems;
-    }
     //Search for the nearest "Null" ItemType slot inside the Array of InventoryItem Scripts.
     public void Additem(ItemType itemType)
     {
@@ -114,6 +116,7 @@ public class Inventory : MonoBehaviour
         //grab public Class
         inventoryClass data = new inventoryClass();
         //set public class values from client side values
+        data.playerPosition = transform.position;
         data.savedItems = items;
         //make public class to json
         string json = JsonUtility.ToJson(data);

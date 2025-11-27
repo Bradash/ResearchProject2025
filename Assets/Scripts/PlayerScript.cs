@@ -1,18 +1,20 @@
 using System.IO;
 using UnityEngine;
-using static SoundManager;
 
 public class PlayerScript : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
+    public class PlayerColor
+    {
+        public Color savedColor;
+    }
     private void Start()
     {
-        //convert string json to public class
-        PlayerColor data = JsonUtility.FromJson<PlayerColor>(LoadFile("playerColor.json"));
-        //set client values public class values
-        spriteRenderer.color = data.savedColor;
+        loadColor();
+        loadLocation();
     }
+
     void FixedUpdate()
     {
         playerFaceMouse();
@@ -42,8 +44,17 @@ public class PlayerScript : MonoBehaviour
         }
         return json;
     }
-    public class PlayerColor
+    public void loadColor()
     {
-        public Color savedColor;
+        //convert string json to public class
+        PlayerColor colorData = JsonUtility.FromJson<PlayerColor>(LoadFile("playerColor.json"));
+        //set client values public class values
+        spriteRenderer.color = colorData.savedColor;
     }
+    public void loadLocation()
+    {
+        Inventory.inventoryClass posData = JsonUtility.FromJson<Inventory.inventoryClass>(LoadFile("item.json"));
+        transform.position = posData.playerPosition;    
+    }
+
 }
