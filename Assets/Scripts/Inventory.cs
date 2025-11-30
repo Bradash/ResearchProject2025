@@ -14,6 +14,7 @@ public class Inventory : MonoBehaviour
     int[] items;
     int selectedItem;
     int lastSelected;
+    public SavePassword savePassword;
 
     public class inventoryClass
     {
@@ -121,7 +122,7 @@ public class Inventory : MonoBehaviour
         //make public class to json
         string json = JsonUtility.ToJson(data);
         //set path with writer
-        using (StreamWriter writer = new StreamWriter(Application.persistentDataPath + "item.json"))
+        using (StreamWriter writer = new StreamWriter(Application.persistentDataPath + savePassword.Password))
         {
             //Serialize and Write file
             writer.Write(json);
@@ -132,7 +133,7 @@ public class Inventory : MonoBehaviour
         //string for json
         string json;
         //set path with reader
-        using (StreamReader reader = new StreamReader(Application.persistentDataPath + "item.json"))
+        using (StreamReader reader = new StreamReader(Application.persistentDataPath + savePassword.Password))
         {
             //Deserialize to string
             json = reader.ReadToEnd();

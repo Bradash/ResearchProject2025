@@ -5,6 +5,7 @@ public class PlayerScript : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
+    public SavePassword savePassword;
     public class PlayerColor
     {
         public Color savedColor;
@@ -12,7 +13,6 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         loadColor();
-        loadLocation();
     }
 
     void FixedUpdate()
@@ -53,7 +53,7 @@ public class PlayerScript : MonoBehaviour
     }
     public void loadLocation()
     {
-        Inventory.inventoryClass posData = JsonUtility.FromJson<Inventory.inventoryClass>(LoadFile("item.json"));
+        Inventory.inventoryClass posData = JsonUtility.FromJson<Inventory.inventoryClass>(LoadFile(savePassword.Password));
         transform.position = posData.playerPosition;    
     }
 
