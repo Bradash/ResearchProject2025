@@ -47,6 +47,7 @@ public class Weapon : MonoBehaviour
     {
         weaponSprite = GetComponent<SpriteRenderer>();
     }
+    //Set to currentItem.image if not null
     public void changeItem()
     {
         if (currentItem == null)

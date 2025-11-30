@@ -57,33 +57,44 @@ public class Inventory : MonoBehaviour
 
     private void changeSelect()
     {
+        //UnHighlight LastSelected Item
         inventoryItems[lastSelected].selectedHighlight.SetActive(false);
+        //Set LastSelected
         lastSelected = selectedItem;
+        //Highlight Selected Item
         inventoryItems[selectedItem].selectedHighlight.SetActive(true);
+        //If there is an Item
         if (inventoryItems[selectedItem].Item != null)
         {
+            //Change Displayed Item to currentItem
             weapon.currentItem = inventoryItems[selectedItem].Item;
             weapon.changeItem();
         }
-        else
+        else 
         {
+            //If No Item Change Displayed Item to null
             weapon.currentItem = null;
             weapon.changeItem();
         }
     }
     private void deselect()
     {
+        //Disable highlight
         inventoryItems[selectedItem].selectedHighlight.SetActive(false);
+        //Change Displayed Item to null
         weapon.currentItem = null;
         weapon.changeItem();
     }
-
     private void dropItem()
     {
+        //If there is an Item
         if (inventoryItems[selectedItem].Item != null)
         {
+            //set pickup to item
             pickup.item = inventoryItems[selectedItem].Item;
+            //Spawn Pickup
             Instantiate(pickupDrop, dropLocation.position, dropLocation.rotation);
+            //Deselect Item and remove item from inventory
             deselect();
             inventoryItems[selectedItem].Item = null;
             inventoryItems[selectedItem].changeItem();
@@ -170,6 +181,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < inventoryItems.Length; i++)
         {
+            //Set inventory array to ItemID Array with chosen Item ID by saved numbers in serialization
             inventoryItems[i].Item = itemID.itemIDS[items[i]];
         }
     }

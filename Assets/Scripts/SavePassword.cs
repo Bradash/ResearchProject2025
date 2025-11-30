@@ -11,6 +11,7 @@ public class SavePassword : MonoBehaviour
     {
         inputField = GetComponent<TMP_InputField>();
     }
+    //Whatever is typed in the inputField set it as the Password
     public void PasswordSet()
     {
         Password = inputField.text;
